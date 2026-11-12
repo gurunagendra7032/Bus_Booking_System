@@ -1,10 +1,11 @@
 package com.example.Bus.Entities;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.*;
+@Entity
 public class Trip {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tripId;
     private String fromDestination;
     private String toDestination;

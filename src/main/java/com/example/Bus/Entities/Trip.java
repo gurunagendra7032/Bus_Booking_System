@@ -10,6 +10,7 @@ public class Trip {
     private String fromDestination;
     private String toDestination;
 
+
     @ManyToOne
     @JoinColumn(name = "bus_id")
     private Bus bus;

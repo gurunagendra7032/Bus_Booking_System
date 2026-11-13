@@ -5,16 +5,17 @@ import jakarta.persistence.*;
 @Entity
 public class Seat {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer seatId;
     private int seatNumber;
 
     @ManyToOne
+    @JoinColumn(name = "bus_id")
     private Bus bus;
 
-    @ManyToOne
-    private Booking booking;
+
 
     public Integer getSeatId() {
         return seatId;
@@ -39,4 +40,7 @@ public class Seat {
     public void setBus(Bus bus) {
         this.bus = bus;
     }
+
+
+
 }

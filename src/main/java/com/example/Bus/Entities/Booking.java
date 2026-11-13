@@ -17,7 +17,7 @@ public class Booking {
         private Trip trip;
 
         @ManyToOne
-        @JoinColumn(name = "user_id", nullable = false)
+        @JoinColumn(name = "user_id")
         private User user;
 
         private LocalDateTime bookingDate;
@@ -26,7 +26,7 @@ public class Booking {
         private BookingStatus status;
 
         @OneToMany(mappedBy = "booking")
-        private List<Seat> seat;
+        private List<BookingSeat> bookingSeat;
 
     public Long getId() {
         return id;
@@ -68,11 +68,11 @@ public class Booking {
         this.status = status;
     }
 
-    public List<Seat> getSeat() {
-        return seat;
+    public List<BookingSeat> getBookingSeat() {
+        return bookingSeat;
     }
 
-    public void setSeat(List<Seat> seat) {
-        this.seat = seat;
+    public void setBookingSeat(List<BookingSeat> bookingSeat) {
+        this.bookingSeat = bookingSeat;
     }
 }

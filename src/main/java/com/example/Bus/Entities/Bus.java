@@ -2,6 +2,8 @@ package com.example.Bus.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Bus {
 
@@ -11,6 +13,8 @@ public class Bus {
     private String busNumber;
     private int totalSeats;
 
+    @OneToMany(mappedBy = "bus")
+    private List<Seat> seat;
 
     public Integer getBusId() {
         return busId;

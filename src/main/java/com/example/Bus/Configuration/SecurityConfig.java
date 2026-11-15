@@ -31,9 +31,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
         http
-                .csrf(Customizer.withDefaults())
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/save/user").permitAll()
+                        .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
+
         return http.build();
     }
 

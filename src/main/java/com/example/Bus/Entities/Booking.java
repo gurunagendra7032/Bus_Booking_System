@@ -25,9 +25,6 @@ public class Booking {
         @Enumerated(EnumType.STRING)
         private BookingStatus status;
 
-        @OneToMany(mappedBy = "booking")
-        private List<BookingSeat> bookingSeat;
-
     public Long getId() {
         return id;
     }
@@ -68,11 +65,4 @@ public class Booking {
         this.status = status;
     }
 
-    public List<BookingSeat> getBookingSeat() {
-        return bookingSeat;
-    }
-
-    public void setBookingSeat(List<BookingSeat> bookingSeat) {
-        this.bookingSeat = bookingSeat;
-    }
 }

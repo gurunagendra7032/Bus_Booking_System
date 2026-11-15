@@ -1,9 +1,7 @@
 package com.example.Bus.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 @Entity
 public class User {
 
@@ -12,7 +10,9 @@ public class User {
     private Integer userId;
     private String userName;
     private String userEmail;
+    private String phoneNumber;
     private String password;
+
 
     public Integer getUserId() {
         return userId;
@@ -44,5 +44,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

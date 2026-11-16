@@ -22,11 +22,13 @@ public class customUserDetails implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
+        System.out.println("inside password : "+user.getPassword());
         return user.getPassword();
     }
 
     @Override
     public String getUsername() {
+        System.out.println("inside username : "+user.getUserName());
         return user.getUserName();
     }
 }

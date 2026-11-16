@@ -23,4 +23,10 @@ public class SeatController {
         return seatRepo. findByBusBusId(id);
     }
 
+    @GetMapping("/get/name")
+    public String hello(){
+        return "Hi Guru Nagendra";
+    }
+
+
 }

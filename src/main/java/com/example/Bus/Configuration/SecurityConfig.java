@@ -1,5 +1,6 @@
 package com.example.Bus.Configuration;
 
+import com.example.Bus.Service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -27,13 +28,12 @@ import java.util.Base64;
 public class SecurityConfig {
 
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/save/user").permitAll()
+                        .requestMatchers("/save/user","/get/users").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
@@ -42,15 +42,26 @@ public class SecurityConfig {
 
 
     @Bean
+    UserDetailsService userDetailsService(){
+        return new CustomUserDetailsService();
+    }
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationProvider authentication(){
-//        DaoAuthenticationProvider dao= new DaoAuthenticationProvider(userDetailsService);
-//        return dao;
-//    }
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,PasswordEncoder passwordEncoder){
+        DaoAuthenticationProvider provider= new DaoAuthenticationProvider(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(provider);
+    }
+
+
+
+
+
 
 
 }

@@ -50,11 +50,11 @@ public class JwtUtility {
     }
 
     public boolean validToken(String token, String username) {
-        return username.equals(extractUsername(username)) && !isTokenValid(token);
+        return username.equals(extractUsername(token)) &&  isTokenValid(token);
     }
 
     public boolean isTokenValid(String token){
-        return extractClaims(token).getExpiration().before(new Date());
+        return extractClaims(token).getExpiration().after(new Date());
     }
 
 }

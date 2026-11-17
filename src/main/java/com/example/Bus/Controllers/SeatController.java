@@ -3,6 +3,7 @@ package com.example.Bus.Controllers;
 import com.example.Bus.Entities.Seat;
 import com.example.Bus.Repositories.SeatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,11 @@ public class SeatController {
     @GetMapping("/get/name")
     public String hello(){
         return "Hi Guru Nagendra";
+    }
+
+    @GetMapping("/get/value")
+    public ResponseEntity<String> getvalue(){
+        return ResponseEntity.ok("Hi I am Back");
     }
 
 

@@ -33,7 +33,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/save/user","/get/users").permitAll()
+                        .requestMatchers("/save/user","/user/login").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 

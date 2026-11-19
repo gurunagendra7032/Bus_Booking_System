@@ -3,7 +3,6 @@ package com.example.Bus.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 public class Booking {
@@ -14,7 +13,7 @@ public class Booking {
 
         @ManyToOne
         @JoinColumn(name = "trip_id", nullable = false)
-        private Trip trip;
+        private TripSchedule tripSchedule;
 
         @ManyToOne
         @JoinColumn(name = "user_id")
@@ -33,12 +32,12 @@ public class Booking {
         this.id = id;
     }
 
-    public Trip getTrip() {
-        return trip;
+    public TripSchedule getTripSchedule() {
+        return tripSchedule;
     }
 
-    public void setTrip(Trip trip) {
-        this.trip = trip;
+    public void setTripSchedule(TripSchedule trip) {
+        this.tripSchedule = tripSchedule;
     }
 
     public User getUser() {

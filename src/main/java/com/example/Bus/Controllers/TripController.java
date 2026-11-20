@@ -1,13 +1,16 @@
 package com.example.Bus.Controllers;
 
+import com.example.Bus.DTO.TripDetailsDto;
 import com.example.Bus.DTO.TripServiceDTO;
 import com.example.Bus.Entities.Bus;
+import com.example.Bus.Entities.BusCompany;
 import com.example.Bus.Entities.Trip;
 import com.example.Bus.Repositories.TripRepo;
 import com.example.Bus.Service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -26,9 +29,9 @@ public class TripController {
     }
 
 
-    @GetMapping("/get/buses/{from}/{to}")
-    public List<TripServiceDTO> getSeats(@PathVariable String from , @PathVariable String to){
-        return tripService.getTotalSeats(from,to);
+    @GetMapping("/get/buses/{from}/{to}/{date}")
+    public List<TripDetailsDto> getSeats(@PathVariable String from , @PathVariable String to , @PathVariable LocalDate date){
+        return tripService.findBusCompanies(from,to,date);
     }
 
     @GetMapping("/get/all/trips")

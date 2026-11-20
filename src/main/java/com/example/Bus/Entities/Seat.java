@@ -9,7 +9,7 @@ public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer seatId;
-    private int seatNumber;
+    private String seatNumber;
 
     @ManyToOne
     @JoinColumn(name = "bus_id")
@@ -25,11 +25,11 @@ public class Seat {
         this.seatId = seatId;
     }
 
-    public int getSeatNumber() {
+    public String getSeatNumber() {
         return seatNumber;
     }
 
-    public void setSeatNumber(int seatNumber) {
+    public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
 

@@ -16,6 +16,7 @@ public class Bus {
     @OneToMany(mappedBy = "bus")
     private List<Seat> seat;
 
+    @ManyToOne
     private BusCompany busCompany;
 
     public Integer getBusId() {

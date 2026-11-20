@@ -20,8 +20,8 @@ public class Trip {
     @NotNull
     private String toDestination;
 
-    @NotNull
-    private LocalDate TripDate;
+
+    private LocalDate tripDate;
 
     @NotNull
     @ManyToOne
@@ -64,11 +64,11 @@ public class Trip {
     }
 
     public LocalDate getTripDate() {
-        return TripDate;
+        return tripDate;
     }
 
     public void setTripDate(LocalDate tripDate) {
-        TripDate = tripDate;
+        this.tripDate = tripDate;
     }
 
     public BusCompany getBusCompany() {

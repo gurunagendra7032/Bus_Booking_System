@@ -1,7 +1,7 @@
 package com.example.Bus.Entities;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotNull;
 
 
 import java.time.LocalDate;
@@ -27,6 +27,9 @@ public class Trip {
     @ManyToOne
     @JoinColumn(name = "bus_id")
     private Bus bus;
+
+    @ManyToOne
+    private BusCompany busCompany;
 
     public Integer getTripId() {
         return tripId;
@@ -66,5 +69,13 @@ public class Trip {
 
     public void setTripDate(LocalDate tripDate) {
         TripDate = tripDate;
+    }
+
+    public BusCompany getBusCompany() {
+        return busCompany;
+    }
+
+    public void setBusCompany(BusCompany busCompany) {
+        this.busCompany = busCompany;
     }
 }

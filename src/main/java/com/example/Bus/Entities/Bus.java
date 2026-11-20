@@ -16,6 +16,8 @@ public class Bus {
     @OneToMany(mappedBy = "bus")
     private List<Seat> seat;
 
+    private BusCompany busCompany;
+
     public Integer getBusId() {
         return busId;
     }
@@ -40,6 +42,11 @@ public class Bus {
         this.totalSeats = totalSeats;
     }
 
+    public BusCompany getBusCompany() {
+        return busCompany;
+    }
 
-
+    public void setBusCompany(BusCompany busCompany) {
+        this.busCompany = busCompany;
+    }
 }

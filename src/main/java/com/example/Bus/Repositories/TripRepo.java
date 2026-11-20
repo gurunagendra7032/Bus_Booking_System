@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface TripRepo extends JpaRepository<Trip,Integer> {
     List<Trip> findByFromDestinationAndToDestinationAndTripDate(String from, String to, LocalDate date);
+
 }

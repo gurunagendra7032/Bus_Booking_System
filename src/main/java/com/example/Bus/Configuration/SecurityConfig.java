@@ -24,6 +24,8 @@ import javax.crypto.SecretKey;
 import java.security.Security;
 import java.util.Base64;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

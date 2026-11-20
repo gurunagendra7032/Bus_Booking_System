@@ -9,6 +9,8 @@
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
 
+    import java.security.Principal;
+    import java.time.LocalDate;
     import java.time.LocalDateTime;
     import java.util.ArrayList;
     import java.util.Date;
@@ -35,24 +37,25 @@
         @Autowired
         private SeatRepo seatRepo;
 
-        @PostMapping("/book/seat/{tripid}/{seats}")
-        public Booking seatBooked(@PathVariable Integer tripid, @PathVariable List<Integer> seats){
+        @PostMapping("/book/seat/{tripid}/{seats}/{date}")
+        public Booking seatBooked(@PathVariable Integer tripid, @PathVariable List<Integer> seats, @PathVariable LocalDate date,Principal principal){
           System.out.println("Trip "+tripid + " seats"+ seats);
             Trip trip = tripRepo.findById(tripid)
                     .orElseThrow(() -> new RuntimeException("Trip not found"));
              Booking booking= new Booking();
 
              booking.setTrip(trip);
-             booking.setBookingDate(LocalDateTime.now());
+             booking.setBookingDate(date);
              booking.setStatus(BookingStatus.CONFORMED);
              booking=bookingRepo.save(booking);
 
-            List<Seat> seatList = seatRepo.findAllById(seats);
+            List<Integer> seatList = seats;
             List<BookingSeat> bookingSeats=new ArrayList<>();
 
-            for(Seat seat : seatList){
+            for(Integer seat : seatList){
                 BookingSeat bookingSeat= new BookingSeat();
-                bookingSeat.setSeat(seat);
+
+                bookingSeat.setSeat(seatRepo.findBySeatNumber(seat));
                 bookingSeat.setBooking(booking);
                bookingSeats.add(bookingSeatRepo.save(bookingSeat));
             }

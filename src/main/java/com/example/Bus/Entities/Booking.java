@@ -2,6 +2,7 @@ package com.example.Bus.Entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,7 +10,7 @@ public class Booking {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private Integer id;
 
         @ManyToOne
         @JoinColumn(name = "trip_id", nullable = false)
@@ -19,16 +20,16 @@ public class Booking {
         @JoinColumn(name = "user_id")
         private User user;
 
-        private LocalDateTime bookingDate;
+        private LocalDate bookingDate;
 
         @Enumerated(EnumType.STRING)
         private BookingStatus status;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,11 +49,11 @@ public class Booking {
         this.user = user;
     }
 
-    public LocalDateTime getBookingDate() {
+    public LocalDate getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(LocalDateTime bookingDate) {
+    public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
     }
 

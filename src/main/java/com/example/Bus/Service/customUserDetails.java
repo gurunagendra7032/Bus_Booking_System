@@ -28,7 +28,7 @@ public class customUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        System.out.println("inside username : "+user.getUserName());
-        return user.getUserName();
+        System.out.println("inside username : "+user.getUserEmail());
+        return user.getUserEmail();
     }
 }

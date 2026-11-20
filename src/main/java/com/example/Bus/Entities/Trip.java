@@ -1,16 +1,29 @@
 package com.example.Bus.Entities;
 
 import jakarta.persistence.*;
+
+
+
+import java.time.LocalDate;
+
+
 @Entity
 public class Trip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tripId;
+
+    @NotNull
     private String fromDestination;
+
+    @NotNull
     private String toDestination;
 
+    @NotNull
+    private LocalDate TripDate;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "bus_id")
     private Bus bus;
@@ -45,5 +58,13 @@ public class Trip {
 
     public void setBus(Bus bus) {
         this.bus = bus;
+    }
+
+    public LocalDate getTripDate() {
+        return TripDate;
+    }
+
+    public void setTripDate(LocalDate tripDate) {
+        TripDate = tripDate;
     }
 }

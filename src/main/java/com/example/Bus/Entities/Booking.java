@@ -13,7 +13,7 @@ public class Booking {
 
         @ManyToOne
         @JoinColumn(name = "trip_id", nullable = false)
-        private TripSchedule tripSchedule;
+        private Trip trip;
 
         @ManyToOne
         @JoinColumn(name = "user_id")
@@ -32,12 +32,12 @@ public class Booking {
         this.id = id;
     }
 
-    public TripSchedule getTripSchedule() {
-        return tripSchedule;
+    public Trip getTrip() {
+        return trip;
     }
 
-    public void setTripSchedule(TripSchedule trip) {
-        this.tripSchedule = tripSchedule;
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     public User getUser() {

@@ -44,6 +44,7 @@
                     .orElseThrow(() -> new RuntimeException("Trip not found"));
             Booking booking = new Booking();
              Bus bus = trip.getBus(); // get BusId from Trip
+            System.out.println("Bus Id " +bus.getBusId());
 
             if(trip.getTripDate().isEqual(date)) {
 
@@ -57,6 +58,7 @@
 
                 for (Integer seat : seatList) {
                     BookingSeat bookingSeat = new BookingSeat();
+                    System.out.println("Seats of Booking : " + seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));
                     bookingSeat.setSeat(seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));  // Here we check Both in Seat table " BusID and Seat Number "
                     bookingSeat.setBooking(booking);
                     bookingSeats.add(bookingSeatRepo.save(bookingSeat));

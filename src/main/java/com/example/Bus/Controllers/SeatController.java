@@ -71,6 +71,7 @@ public class SeatController {
 
 
 
+
     @GetMapping("/get/name")
     public String hello(){
         return "Hi Guru Nagendra";

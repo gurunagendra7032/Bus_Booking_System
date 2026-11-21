@@ -39,6 +39,7 @@ public class TripService {
             Bus bus= t.getBus();
             tripDetailsDto.setBusCompany(busCompany);
             tripDetailsDto.setBusId(bus);
+            tripDetailsDto.setTripId(t.getTripId());
             result.add(tripDetailsDto);
         }
 

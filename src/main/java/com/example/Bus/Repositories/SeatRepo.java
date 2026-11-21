@@ -11,5 +11,6 @@ public interface SeatRepo extends JpaRepository<Seat,Integer> {
 
     List<Seat> findByBus_BusId(Integer busId);
 
-    Seat findBySeatNumber(int val);
+    Seat findByBusBusIdAndSeatNumber( Integer busId,
+                                         int seatNumbers);
 }

@@ -7,6 +7,7 @@ public class TripDetailsDto {
 
     public Bus busId;
     public BusCompany busCompany;
+    public Integer tripId;
 
     public Bus getBusId() {
         return busId;
@@ -22,5 +23,13 @@ public class TripDetailsDto {
 
     public void setBusCompany(BusCompany busCompany) {
         this.busCompany = busCompany;
+    }
+
+    public Integer getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Integer tripId) {
+        this.tripId = tripId;
     }
 }

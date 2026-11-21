@@ -38,30 +38,34 @@
         private SeatRepo seatRepo;
 
         @PostMapping("/book/seat/{tripid}/{seats}/{date}")
-        public Booking seatBooked(@PathVariable Integer tripid, @PathVariable List<Integer> seats, @PathVariable LocalDate date,Principal principal){
+        public String seatBooked(@PathVariable Integer tripid, @PathVariable List<Integer> seats, @PathVariable LocalDate date,Principal principal){
           System.out.println("Trip "+tripid + " seats"+ seats);
             Trip trip = tripRepo.findById(tripid)
                     .orElseThrow(() -> new RuntimeException("Trip not found"));
-             Booking booking= new Booking();
+            Booking booking = new Booking();
+             Bus bus = trip.getBus(); // get BusId from Trip
 
-             booking.setTrip(trip);
-             booking.setBookingDate(date);
-             booking.setStatus(BookingStatus.CONFORMED);
-             booking=bookingRepo.save(booking);
+            if(trip.getTripDate().isEqual(date)) {
 
-            List<Integer> seatList = seats;
-            List<BookingSeat> bookingSeats=new ArrayList<>();
+                booking.setTrip(trip);
+                booking.setBookingDate(date);
+                booking.setStatus(BookingStatus.CONFORMED);
+                booking = bookingRepo.save(booking);
 
-            for(Integer seat : seatList){
-                BookingSeat bookingSeat= new BookingSeat();
+                List<Integer> seatList = seats;
+                List<BookingSeat> bookingSeats = new ArrayList<>();
 
-                bookingSeat.setSeat(seatRepo.findBySeatNumber(seat));
-                bookingSeat.setBooking(booking);
-               bookingSeats.add(bookingSeatRepo.save(bookingSeat));
+                for (Integer seat : seatList) {
+                    BookingSeat bookingSeat = new BookingSeat();
+                    bookingSeat.setSeat(seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));  // Here we check Both in Seat table " BusID and Seat Number "
+                    bookingSeat.setBooking(booking);
+                    bookingSeats.add(bookingSeatRepo.save(bookingSeat));
+                }
+                return " Booking Conformed";
+            }else{
+                return " No Trips on that Date";
             }
 
-
-        return booking;
         }
 
     }

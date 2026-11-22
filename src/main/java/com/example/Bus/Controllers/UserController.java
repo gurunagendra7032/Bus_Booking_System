@@ -35,6 +35,7 @@ public class UserController {
     public User saveUser(@RequestBody User user){
         System.out.println(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.se
         return  userRepo.save(user);
     }
 

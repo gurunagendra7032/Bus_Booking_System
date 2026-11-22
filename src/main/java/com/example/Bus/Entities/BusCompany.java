@@ -14,6 +14,7 @@ public class BusCompany {
     @NotNull
     private String BusComapnyName;
 
+
     public Integer getId() {
         return id;
     }

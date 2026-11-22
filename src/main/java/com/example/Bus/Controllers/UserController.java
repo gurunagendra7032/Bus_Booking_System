@@ -2,6 +2,7 @@ package com.example.Bus.Controllers;
 
 import com.example.Bus.Configuration.JwtUtility;
 import com.example.Bus.DTO.LoginDTO;
+import com.example.Bus.Entities.Role;
 import com.example.Bus.Entities.User;
 import com.example.Bus.Repositories.UserRepo;
 import com.example.Bus.Service.CustomUserDetailsService;
@@ -35,7 +36,7 @@ public class UserController {
     public User saveUser(@RequestBody User user){
         System.out.println(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.se
+        user.setRole(Role.USER);
         return  userRepo.save(user);
     }
 
@@ -53,6 +54,15 @@ public class UserController {
         }
 
     }
+
+    @PostMapping("/save/admin")
+    public User saveAdmin(@RequestBody User user){
+        user.setRole(Role.ADMIN);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepo.save(user);
+    }
+
+
 
 
 

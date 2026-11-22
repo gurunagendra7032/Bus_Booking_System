@@ -40,7 +40,7 @@ public class SecurityConfig {
 
                 .cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/save/user","/user/login").permitAll()
+                        .requestMatchers("/save/user","/user/login","/save/admin").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(
                 jwtAuthenticationFilter,

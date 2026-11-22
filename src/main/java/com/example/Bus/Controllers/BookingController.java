@@ -1,10 +1,7 @@
     package com.example.Bus.Controllers;
 
     import com.example.Bus.Entities.*;
-    import com.example.Bus.Repositories.BookingRepo;
-    import com.example.Bus.Repositories.BookingSeatRepo;
-    import com.example.Bus.Repositories.SeatRepo;
-    import com.example.Bus.Repositories.TripRepo;
+    import com.example.Bus.Repositories.*;
     import com.example.Bus.Service.BookingService;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
@@ -37,6 +34,9 @@
         @Autowired
         private SeatRepo seatRepo;
 
+        @Autowired
+        private UserRepo userRepo;
+
         @PostMapping("/book/seat/{tripid}/{seats}/{date}")
         public String seatBooked(@PathVariable Integer tripid, @PathVariable List<Integer> seats, @PathVariable LocalDate date,Principal principal){
           System.out.println("Trip "+tripid + " seats"+ seats);
@@ -47,9 +47,11 @@
             System.out.println("Bus Id " +bus.getBusId());
 
             if(trip.getTripDate().isEqual(date)) {
+                 String user = principal.getName();
 
                 booking.setTrip(trip);
                 booking.setBookingDate(date);
+                booking.setUser(userRepo.findByUserEmail(user));
                 booking.setStatus(BookingStatus.CONFORMED);
                 booking = bookingRepo.save(booking);
 

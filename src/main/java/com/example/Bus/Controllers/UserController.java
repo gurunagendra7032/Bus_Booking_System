@@ -2,6 +2,7 @@ package com.example.Bus.Controllers;
 
 import com.example.Bus.Configuration.JwtUtility;
 import com.example.Bus.DTO.LoginDTO;
+import com.example.Bus.DTO.LoginResponseDTO;
 import com.example.Bus.Entities.Role;
 import com.example.Bus.Entities.User;
 import com.example.Bus.Repositories.UserRepo;
@@ -32,6 +33,7 @@ public class UserController {
     @Autowired
     private JwtUtility jwtUtility;
 
+
     @PostMapping("/save/user")
     public User saveUser(@RequestBody User user){
         System.out.println(user);
@@ -41,18 +43,22 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public String getToken(@RequestBody LoginDTO loginDTO){
+    public LoginResponseDTO getToken(@RequestBody LoginDTO loginDTO){
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
         System.out.println("inside the controller"+loginDTO.getUsername()+" "+loginDTO.getPassword());
         Authentication auth =authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),loginDTO.password)
         );
 
+        String token ="";
         if(auth.isAuthenticated()){
-           return jwtUtility.generateKey(loginDTO.getUsername());
+            token = jwtUtility.generateKey(loginDTO.getUsername());
         }else{
-            return " Token is Not generated";
+            token = " Token is Not generated";
         }
-
+        loginResponseDTO.setToken(token);
+        loginResponseDTO.setUser(userRepo.findByUserEmail(loginDTO.getUsername()));
+        return loginResponseDTO;
     }
 
     @PostMapping("/save/admin")

@@ -3,11 +3,12 @@ package com.example.Bus.Controllers;
 import com.example.Bus.Entities.BusCompany;
 import com.example.Bus.Repositories.BusCompanyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class BusCompanyController {
 
     @Autowired
@@ -16,6 +17,11 @@ public class BusCompanyController {
     @PostMapping("/save/buscompany")
     public BusCompany saveComapnies(@RequestBody BusCompany busCompany){
         return busCompanyRepo.save(busCompany);
+    }
+
+    @GetMapping("/get/all/companies")
+    public List<BusCompany> getAllBusCompanies(){
+       return busCompanyRepo.findAll();
     }
 
 }

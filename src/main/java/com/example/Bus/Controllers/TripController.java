@@ -23,7 +23,7 @@ public class TripController {
     @Autowired
     private TripService tripService;
 
-    @PostMapping("/save/tripDetails")
+    @PostMapping("/admin/save/tripDetails")
     public Trip saveTrip(@RequestBody Trip trip){
         return tripRepo.save(trip);
     }

@@ -3,29 +3,27 @@ package com.example.Bus.Controllers;
 import com.example.Bus.Entities.Bus;
 import com.example.Bus.Repositories.BusRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class BusController {
 
     @Autowired
      private BusRepo busRepo;
 
-    @PostMapping("/save/bus/details")
+    @PostMapping("/admin/save/bus/details")
     public Bus saveBusDetails(@RequestBody Bus bus){
         return busRepo.save(bus);
     }
 
-    @GetMapping("/get/buses")
-    public List<Bus> getAllBuses(Principal principal){
+    @GetMapping("/admin/get/{id}/buses")
+    public List<Bus> getAllBuses(@PathVariable int id){
 
-        return busRepo.findAll();
+        return busRepo.findByBusCompany_Id(id);
     }
 
 

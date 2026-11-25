@@ -14,12 +14,12 @@ public class BusCompanyController {
     @Autowired
     private BusCompanyRepo busCompanyRepo;
 
-    @PostMapping("/save/buscompany")
+    @PostMapping("/admin/save/buscompany")
     public BusCompany saveComapnies(@RequestBody BusCompany busCompany){
         return busCompanyRepo.save(busCompany);
     }
 
-    @GetMapping("/get/all/companies")
+    @GetMapping("/admin/get/all/companies")
     public List<BusCompany> getAllBusCompanies(){
        return busCompanyRepo.findAll();
     }

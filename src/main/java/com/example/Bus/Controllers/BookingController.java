@@ -52,7 +52,6 @@
                 booking.setTrip(trip);
                 booking.setBookingDate(date);
                 booking.setUser(userRepo.findByUserEmail(user));
-                booking.setStatus(BookingStatus.CONFORMED);
                 booking = bookingRepo.save(booking);
 
                 List<Integer> seatList = seats;
@@ -66,9 +65,12 @@
                     bookingSeat.setTrip(trip);
                     bookingSeats.add(bookingSeatRepo.save(bookingSeat));
 
+
                 }
+                booking.setStatus(BookingStatus.CONFORMED);
                 return " Booking Conformed";
             }else{
+                booking.setStatus(BookingStatus.NOTCONFORMED);
                 return " No Trips on that Date";
             }
 

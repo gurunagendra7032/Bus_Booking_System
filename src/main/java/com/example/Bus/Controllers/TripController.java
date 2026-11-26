@@ -36,8 +36,7 @@ public class TripController {
 
         Integer busId = trip.getBus().getBusId();
         Integer companyId = trip.getBusCompany().getId();
-System.out.println(busId);
-System.out.println(companyId);
+
         Bus bus = busRepo.findById(busId)
                 .orElseThrow(() -> new RuntimeException("Bus not found"));
 

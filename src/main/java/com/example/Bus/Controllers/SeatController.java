@@ -42,11 +42,11 @@ public class SeatController {
     @GetMapping("/get/{id}/seats")
     public List<Seat> getSeats(@PathVariable Integer id) {
 
-        // Get Booking IDs for this Trip
-        List<Integer> bookedIds = seatService.getSeats(id);
 
-        // Get Seat IDs associated with those bookings
-        List<Integer> bookedSeats = bookingSeatService.getSeatIds(bookedIds);
+        List<Integer> bookedIds = seatService.getSeats(id);    // Get Booking IDs for this Trip
+
+
+        List<Integer> bookedSeats = bookingSeatService.getSeatIds(bookedIds);// Get Seat IDs associated with those bookings
 
         System.out.println("Booked Seat IDs: " + bookedSeats);
 

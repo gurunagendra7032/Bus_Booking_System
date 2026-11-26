@@ -63,7 +63,9 @@
                     System.out.println("Seats of Booking : " + seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));
                     bookingSeat.setSeat(seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));  // Here we check Both in Seat table " BusID and Seat Number "
                     bookingSeat.setBooking(booking);
+                    bookingSeat.setTrip(trip);
                     bookingSeats.add(bookingSeatRepo.save(bookingSeat));
+
                 }
                 return " Booking Conformed";
             }else{

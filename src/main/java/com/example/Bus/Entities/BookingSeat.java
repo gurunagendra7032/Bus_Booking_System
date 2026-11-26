@@ -1,6 +1,16 @@
 package com.example.Bus.Entities;
 
 import jakarta.persistence.*;
+
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_trip_seat",
+                        columnNames = {"trip_id", "seat_id"}
+                )
+        }
+)
+
 @Entity
 public class BookingSeat {
 
@@ -15,6 +25,10 @@ public class BookingSeat {
     @ManyToOne
     @JoinColumn(name = "seat_id")
     private Seat seat;
+
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
 
     public Integer getId() {
         return id;
@@ -38,5 +52,13 @@ public class BookingSeat {
 
     public void setSeat(Seat seat) {
         this.seat = seat;
+    }
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 }

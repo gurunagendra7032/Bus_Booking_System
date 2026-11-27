@@ -4,6 +4,7 @@
     import com.example.Bus.Repositories.*;
     import com.example.Bus.Service.BookingService;
     import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.transaction.annotation.Transactional;
     import org.springframework.web.bind.annotation.*;
 
     import java.security.Principal;
@@ -37,6 +38,7 @@
         @Autowired
         private UserRepo userRepo;
 
+        @Transactional
         @PostMapping("/book/seat/{tripid}/{seats}/{date}")
         public String seatBooked(@PathVariable Integer tripid, @PathVariable List<Integer> seats, @PathVariable LocalDate date,Principal principal){
           System.out.println("Trip "+tripid + " seats"+ seats);
@@ -52,25 +54,28 @@
                 booking.setTrip(trip);
                 booking.setBookingDate(date);
                 booking.setUser(userRepo.findByUserEmail(user));
+                booking.setStatus(BookingStatus.CONFORMED);
                 booking = bookingRepo.save(booking);
 
                 List<Integer> seatList = seats;
                 List<BookingSeat> bookingSeats = new ArrayList<>();
+               try {
+                   for (Integer seat : seatList) {
+                       BookingSeat bookingSeat = new BookingSeat();
+                       System.out.println("Seats of Booking : " + seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));
+                       bookingSeat.setSeat(seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));  // Here we check Both in Seat table " BusID and Seat Number "
+                       bookingSeat.setBooking(booking);
+                       bookingSeat.setTrip(trip);
+                       bookingSeats.add(bookingSeatRepo.save(bookingSeat));
 
-                for (Integer seat : seatList) {
-                    BookingSeat bookingSeat = new BookingSeat();
-                    System.out.println("Seats of Booking : " + seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));
-                    bookingSeat.setSeat(seatRepo.findByBusBusIdAndSeatNumber(bus.getBusId(), seat));  // Here we check Both in Seat table " BusID and Seat Number "
-                    bookingSeat.setBooking(booking);
-                    bookingSeat.setTrip(trip);
-                    bookingSeats.add(bookingSeatRepo.save(bookingSeat));
+                   }
+               }catch(Exception e){
+                   throw (e);
+               }
 
-
-                }
-                booking.setStatus(BookingStatus.CONFORMED);
                 return " Booking Conformed";
             }else{
-                booking.setStatus(BookingStatus.NOTCONFORMED);
+
                 return " No Trips on that Date";
             }
 
